@@ -3,6 +3,7 @@ import { Loader } from '../Loader';
 import { getUser } from '../../api';
 import { User } from '../../types/User';
 import { Todo } from '../../types/Todo';
+import classNames from 'classnames';
 
 type Props = {
   isActive: number | null;
@@ -16,7 +17,7 @@ export const TodoModal: React.FC<Props> = ({
   activeTodo,
 }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(true);
 
   useEffect(() => {
     if (!activeTodo) {
@@ -89,9 +90,10 @@ export const TodoModal: React.FC<Props> = ({
 
             <p className="block" data-cy="modal-user">
               <strong
-                className={
-                  activeTodo.completed ? 'has-text-success' : 'has-text-danger'
-                }
+                className={classNames({
+                  'has-text-success': activeTodo.completed,
+                  'has-text-danger': !activeTodo.completed,
+                })}
               >
                 {activeTodo.completed ? 'Done' : 'Planned'}
               </strong>
