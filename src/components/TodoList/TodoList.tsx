@@ -49,7 +49,9 @@ export const TodoList: React.FC<Props> = ({
         {filteredToDo.map((todo: Todo) => (
           <tr
             data-cy="todo"
-            className={isActive === todo.id ? 'has-background-info-light' : ''}
+            className={classNames({
+              'has-background-info-light': isActive === todo.id,
+            })}
             key={todo.id}
           >
             <td className="is-vcentered">{todo.id}</td>
